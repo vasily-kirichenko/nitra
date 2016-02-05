@@ -7,6 +7,8 @@ using Nemerle.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Nitra.ProjectSystem
 {
@@ -34,16 +36,76 @@ namespace Nitra.ProjectSystem
     }
 
     private mutable _source : ISource;
+    private _parsingLock = object();
+    private mutable _parsingCTS: option[CancellationTokenSource] = None();
 
     public override GetSource() : SourceSnapshot  { SourceSnapshot(_source.GetText(), this) }
     public override Length      : int             { get { _source.GetText().Length } }
 
     public SourceChanged(newSource : ISource) : void
     {
+      def log(msg) 
+      { 
+        lock (GetType())
+          IO.File.AppendAllText(@"d:\temp\_nitra_.txt", $"[$(DateTime.Now), TID $(Thread.CurrentThread.ManagedThreadId)] File = $Index, $msg\n"); 
+      }
+      //def log(msg) {}
+      log("-1");
       _source = newSource;
+      lock (_parsingLock)
+      {
+        _parsingCTS.Iter(x => 
+        { 
+          x.Cancel();
+          x.Dispose() 
+        });
 
-      ReParse();
-      GetCompilerMessages().TranslateTo(Project.CompilerMessages);
+        def cts = CancellationTokenSource();
+        _parsingCTS = Some(cts);
+        
+        def ctx = SynchronizationContext.Current ?? SynchronizationContext();
+        
+        log("0");
+        _ = Task.Delay(500).ContinueWith(_ => 
+             {
+               if (cts.Token.IsCancellationRequested) None()
+               else
+               {
+                 ReParse();
+                 if (cts.Token.IsCancellationRequested) None()
+                 else Some(GetCompilerMessages());
+               }
+             }).ContinueWith(t =>
+             {
+               match (t.Result, cts.Token.IsCancellationRequested) 
+               {
+                 | (Some(messages), false) =>
+                    try
+                    {
+                      log("6.1");
+                      ctx.Post(_ =>
+                      {
+                        log("6.3");
+                        try
+                          messages.TranslateTo(Project.CompilerMessages);
+                        catch {
+                        | e => log($"6.4 EXN: $(e.ToString())");
+                        }
+                        log("6.4");
+                      }, null);
+                    }
+                    catch
+                    { 
+                      | e => log($"6.2 EXN: $(e.ToString())");
+                    }
+                    log("7");
+               | _ => log("6.2");
+               }
+               cts.Dispose();
+               log("8");
+             });
+      }
+      log("9");
     }
   }
 
