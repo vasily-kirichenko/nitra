@@ -132,7 +132,7 @@
             <Button Command="{StaticResource Reparse}">Reparse code</Button>
           </ToolBar>
         </ToolBarTray>
-        <TreeView Name="_testsTreeView" Grid.Row="1" Grid.Column="0" Height="Auto" FontSize="16" SelectedItemChanged="_testsTreeView_SelectedItemChanged">
+        <TreeView Name="_testsTreeView" Grid.Row="1" Grid.Column="0" Height="Auto" FontSize="14" SelectedItemChanged="_testsTreeView_SelectedItemChanged">
           <TreeView.ContextMenu>
             <ContextMenu>
               <MenuItem Command="{StaticResource AddExistsTestSuite}" />
@@ -194,7 +194,7 @@
           </TreeView.ItemContainerStyle>
         </TreeView>
         <GridSplitter Grid.Row="1" Grid.Column="0" Width="9" ResizeDirection="Columns" HorizontalAlignment="Right" VerticalAlignment="Stretch" Background="#5700FF00" Margin="0,0,-9,0"  />
-        <viz:NitraTextEditor x:Name="_text" Grid.Row="1" Grid.Column="2" TextChanged="textBox1_TextChanged" MouseHover="textBox1_MouseHover"  MouseHoverStopped="textBox1_MouseHoverStopped" FontFamily="Consolas" FontSize="16" LostFocus="textBox1_LostFocus" GotFocus="textBox1_GotFocus" HighlightLine="textBox1_HighlightLine" KeyDown="_control_KeyDown_resize" />
+        <viz:NitraTextEditor x:Name="_text" Grid.Row="1" Grid.Column="2" TextChanged="textBox1_TextChanged" MouseHover="textBox1_MouseHover"  MouseHoverStopped="textBox1_MouseHoverStopped" FontFamily="Consolas" FontSize="14" LostFocus="textBox1_LostFocus" GotFocus="textBox1_GotFocus" HighlightLine="textBox1_HighlightLine" KeyDown="_control_KeyDown_resize" />
       </Grid>
     </Grid>
     <GridSplitter Grid.Row="1" Height="8" ResizeDirection="Rows" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#5700FF00" />
@@ -207,7 +207,7 @@
             <ColumnDefinition Width="5" />
             <ColumnDefinition />
           </Grid.ColumnDefinitions>
-          <TreeView Name="_declarationsTreeView" FontSize="16" Grid.ColumnSpan="3" Margin="5,0,0,0" SelectedItemChanged="_declarationsTreeView_SelectedItemChanged" />
+          <TreeView Name="_declarationsTreeView" FontSize="14" Grid.ColumnSpan="3" Margin="5,0,0,0" SelectedItemChanged="_declarationsTreeView_SelectedItemChanged" />
           <GridSplitter Grid.Column="2" HorizontalAlignment="Stretch" />
           <Grid Grid.Column="3">
             <Grid.RowDefinitions>
@@ -222,7 +222,7 @@
 
       <TabItem Header="Reflection" Name="_reflectionTabItem">
         <ui:TreeGridView Name="_reflectionTreeView" ItemsSource="{Binding (reflection:ReflectionStruct.Children)}" AllowColumnResize="True" 
-                         SelectedItemChanged="_reflectionTreeView_SelectedItemChanged" FontSize="16" ShowColumnHeaders="False" KeyDown="_control_KeyDown_resize">
+                         SelectedItemChanged="_reflectionTreeView_SelectedItemChanged" FontSize="14" ShowColumnHeaders="False" KeyDown="_control_KeyDown_resize">
           <ui:TreeGridView.Resources>
             <viz:ReflectionStructColorConverter x:Key="ReflectionStructColorConverter" />
             <Style TargetType="ui:TreeGridRow">
@@ -245,7 +245,7 @@
           </ui:TreeGridView.ContextMenu>
         </ui:TreeGridView>
 
-        <!--<TreeView Name="_reflectionTreeView2" FontSize="16" SelectedItemChanged="treeView1_SelectedItemChanged"
+        <!--<TreeView Name="_reflectionTreeView2" FontSize="14" SelectedItemChanged="treeView1_SelectedItemChanged"
           VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
           <TreeView.Resources>
             <HierarchicalDataTemplate DataType="{x:Type vm:ReflectionStructVm}" ItemsSource="{Binding Path=Children}">
@@ -270,7 +270,7 @@
         <TextBox Name="_prettyPrintTextBox" FontFamily="Consolas" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyDown="_control_KeyDown_resize" />
       </TabItem>
       <TabItem Header="Performance"  Name="_performanceTabItem">
-        <TreeView Name="_performanceTreeView" FontSize="16">
+        <TreeView Name="_performanceTreeView" FontSize="14">
           <TreeView.ContextMenu>
             <ContextMenu>
               <MenuItem Header="Copy" Click="_copyButton_Click"/>
@@ -317,32 +317,32 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" MinWidth="150" />
           </Grid.ColumnDefinitions>
-          <Label     Content="Parse took:"                 Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_parseTime"                     Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <Label     Content="Recovery took:"                 Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_recoveryTime"                     Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <CheckBox Name="_calcParseTreeTime"              Grid.Row="2" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Parse Tree materialisation took:"  IsChecked="True" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_parseTreeTime"                 Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <Label Content="Outlining took:"                 Grid.Row="3" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_outliningTime"                 Grid.Row="3" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <Label Content="Highlighting took:"              Grid.Row="4" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_highlightingTime"              Grid.Row="4" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <Label Content="Parse Total:"                    Grid.Row="5" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="16" />
-          <TextBlock  Name="_totalTime"                    Grid.Row="5" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontWeight="Bold" FontSize="16" />
-          <Button Content="_Copy" Name="_copyButton"       Grid.Row="6" Grid.Column="0" Margin="0,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="16,2,16,2" Click="_copyButton_Click" FontSize="16" />
+          <Label     Content="Parse took:"                 Grid.Row="0" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_parseTime"                     Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <Label     Content="Recovery took:"                 Grid.Row="1" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_recoveryTime"                     Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <CheckBox Name="_calcParseTreeTime"              Grid.Row="2" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Parse Tree materialisation took:"  IsChecked="True" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_parseTreeTime"                 Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <Label Content="Outlining took:"                 Grid.Row="3" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_outliningTime"                 Grid.Row="3" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <Label Content="Highlighting took:"              Grid.Row="4" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_highlightingTime"              Grid.Row="4" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <Label Content="Parse Total:"                    Grid.Row="5" Grid.Column="0" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="14" />
+          <TextBlock  Name="_totalTime"                    Grid.Row="5" Grid.Column="1" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontWeight="Bold" FontSize="14" />
+          <Button Content="_Copy" Name="_copyButton"       Grid.Row="6" Grid.Column="0" Margin="0,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="16,2,16,2" Click="_copyButton_Click" FontSize="14" />
 
-          <Label Content="Make AST took:"                  Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_makeAstTime"                   Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <Label Content="Calc dependent properties took:" Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_findBestPathTime"              Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <Label Content=""                                Grid.Row="3" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" />
-          <TextBlock Name="_flattenSequenceTime"           Grid.Row="3" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="16" />
-          <Label Content="AST Total:"                      Grid.Row="5" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="16" />
-          <TextBlock Name="_astTotal"                      Grid.Row="5" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontWeight="Bold" FontSize="16" />
+          <Label Content="Make AST took:"                  Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_makeAstTime"                   Grid.Row="0" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <Label Content="Calc dependent properties took:" Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_findBestPathTime"              Grid.Row="1" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <Label Content=""                                Grid.Row="3" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontSize="14" />
+          <TextBlock Name="_flattenSequenceTime"           Grid.Row="3" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontSize="14" />
+          <Label Content="AST Total:"                      Grid.Row="5" Grid.Column="2" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="14" />
+          <TextBlock Name="_astTotal"                      Grid.Row="5" Grid.Column="3" Margin="5,0,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="..." FontWeight="Bold" FontSize="14" />
         </Grid>-->
       </TabItem>
       <TabItem Header="Errors" Name="_errorsTabItem">
-        <TreeView Name="_errorsTreeView" FontSize="16" KeyDown="_control_KeyDown_resize">
+        <TreeView Name="_errorsTreeView" FontSize="14" KeyDown="_control_KeyDown_resize">
           <TreeView.ContextMenu>
             <ContextMenu >
               <MenuItem Header="Copy" Click="_errorsTreeView_CopyNodeText"/>
@@ -351,7 +351,7 @@
         </TreeView>
       </TabItem>
       <TabItem Visibility="Collapsed" Header="Recovery" Name="_recoveryTabItem">
-        <TreeView Name="_recoveryTreeView" FontSize="16" />
+        <TreeView Name="_recoveryTreeView" FontSize="14" />
       </TabItem>
       <TabItem Header="Diff" Name="_testResultDiffTabItem">
         <FlowDocumentScrollViewer KeyDown="_control_KeyDown_resize">
