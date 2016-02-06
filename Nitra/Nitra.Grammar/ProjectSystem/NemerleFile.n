@@ -46,8 +46,8 @@ namespace Nitra.ProjectSystem
     {
       def log(msg) 
       { 
-        lock (GetType())
-          IO.File.AppendAllText(@"d:\temp\_nitra_.txt", $"[$(DateTime.Now), TID $(Thread.CurrentThread.ManagedThreadId)] File = $Index, $msg\n"); 
+        //lock (GetType())
+          //IO.File.AppendAllText(@"d:\temp\_nitra_.txt", $"[$(DateTime.Now), TID $(Thread.CurrentThread.ManagedThreadId)] File = $Index, $msg\n"); 
       }
       //def log(msg) {}
       log("-1");
